@@ -27,6 +27,8 @@ int main() {
     {
         r.erase(r.end() - 1);
     }
+    
+    
     cout << r;
     return 0;
 }
