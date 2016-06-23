@@ -11,7 +11,17 @@ int main()
     {
         int a, b;
         cin >> a >> b;
-        val_map.insert(pair<int,int>(b, a));
+
+        // debug
+        map<int,int>:: iterator it2 = val_map.find(b);
+        if(it2 != val_map.end())
+        {
+            it2->second += a;
+        }
+        else 
+        {
+            val_map.insert(pair<int,int>(b, a));
+        }
     }
 
     // already sorted
@@ -29,10 +39,7 @@ int main()
            r += (it->second * it->first);
            m -= it->second;
        }
-       cout << "m: " << m << endl;
-       cout << "r: " << r << endl;
     }
     cout << r << endl;
-
-
+    return 0;
 }
