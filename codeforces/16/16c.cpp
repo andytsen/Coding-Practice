@@ -2,54 +2,18 @@
 #include <stdio.h>
 using namespace std;
 
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+
 int main() 
 {
-    long long a, b, x, y;
+    int a, b, x, y, g;
     cin >> a >> b >> x >> y;
-
-    long long r1, r2, d;
-    if(a % x != 0 && b % y != 0) 
-    {
-        d = 0L;
-    }
-    else 
-    {
-        if(a % x == 0)
-        {
-            if(b % y == 0)
-            {
-                if(a/x < b/y)
-                {
-                    d = b/y;
-                }
-                else 
-                {
-                    d = a/x;
-                }
-            }
-            else 
-            {
-                if(y > b)
-                    d = 0;
-                else 
-                    d = a/x;
-            }
-        }
-        else 
-        {
-            if(b % y == 0)
-            {
-                if(x > a)
-                    d = 0;
-                else 
-                    d = b/y;
-            }
-            else 
-                d = 0;
-        }
-    }
-    r1 = d * x;
-    r2 = d * y;
-    printf("%lld %lld\n", r1, r2);
+    g = gcd(x,y); 
+    x /= g;
+    y /= g;
+    a = min(a/x, b/y);
+    cout << a * x <<  " " << y * a << endl;
     return 0;
 }
