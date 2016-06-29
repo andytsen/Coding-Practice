@@ -10,15 +10,14 @@ int main()
     {
         if(b1 == 0 && a2 == 0)
         {
-           if(a1 == 0 && c1 != 0)
-           {
+            if(a1 == 0 && c1 != 0)
+            {
 
-           }
-           else if(b2 == 0)
-        }
-        else if(b2 == 0 && a1 == 0)
-        {
+            }
+            else if(b2 == 0 && a1 == 0)
+            {
 
+            }
         }
     }
     else 
@@ -42,8 +41,7 @@ int main()
             cout << 1 << endl;
         }
     }
-    
-
+    return 0;
 
 
 }

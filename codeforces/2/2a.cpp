@@ -1,34 +1,42 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <limits.h>
+using namespace std;
 
 int main()
 {
-    std::map<std::string, int> mymap;
-    std::string winner;
-    int high = -1001;
+    map<string, int> mymap;
+    string winner;
+    int high = INT_MIN;
     int n;
     std::cin >> n;
     for(int i = 0; i < n; i++)
     {
-        std::string a;
-        std::cin >> a;
+        string a;
         int b;
-        std::cin >> b;
-        // add key to map
-        if(mymap.count(a) > 0)
+        cin >> a >> b;
+        map<string, int>:: iterator it = mymap.find(a);
+        if(it != mymap.end())
         {
-            mymap.at(a) += b;
+            it->second += b;
+            if(it->second > high)
+            {
+                winner = a;
+                high = it->second;
+            }
         }
-        else
-            mymap.insert(std::pair<std::string, int>(a, b)); 
-
-        if(high < mymap.at(a))
+        else 
         {
-            winner = a;
-            high = mymap.at(a);
+            mymap.insert(pair<string, int> (a,b));
+            if(b > high)
+            {
+                high = b;
+                winner = a;
+            }
+
         }
     }
-    std::cout << winner; 
+    std::cout << winner << endl; 
     return 0;
 }
