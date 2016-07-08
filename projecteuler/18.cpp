@@ -6,10 +6,10 @@ int main()
 {
     string line;
     int most = 0;
-    int arr[15];
-    while(getline(cin, line))     
+    int pos = 0;
+    for(int i = 1; i <= 15; i++)
     {
-        
+         
     }
     return 0;
 }

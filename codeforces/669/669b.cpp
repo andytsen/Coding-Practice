@@ -1,11 +1,6 @@
 #include <iostream>
 using namespace std;
 
-bool facing(char a, char b)
-{
-    return (a == '>' && b == '<');
-}
-
 int main() {
     int n;
     cin >> n;
