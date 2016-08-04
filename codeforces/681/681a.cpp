@@ -13,12 +13,11 @@ int main() {
         cin >> c >> a >> b;
         if(a >= 2400)
         {
-            if((a - b) > 0)
+            if((b - a) > 0)
             {
                 d = 1;
                 break;
             }
-                
         }
     }
     if(d)
