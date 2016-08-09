@@ -1,9 +1,2 @@
-4
-aba
-baba
-aba
-xzxb
-3
-aba
-xzxb
-ab
+5 4
+1 2 3 4 5
