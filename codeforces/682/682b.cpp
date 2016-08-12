@@ -7,25 +7,14 @@ int main()
 {
     int n;
     cin >> n;
-    int p = 0;
-    vector <int> list;
+    int p = 1;
     for(int i = 0; i < n; i++)
     {
         int ai;
         cin >> ai;
-        list.push_back(ai);
-    }
-    sort(list.begin(), list.end());
-    vector<int>:: iterator it;
-    int i =0;
-    for(it = list.begin(); it != list.end(); it++)
-    {
-        if(*it > p)
-        {
+        if(ai >= p)
             p++;
-        } 
-        i++;
     }
-    cout << p + 1 << endl;
+    cout << p << endl;
     return 0;
 }
