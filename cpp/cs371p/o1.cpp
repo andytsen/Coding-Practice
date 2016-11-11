@@ -17,9 +17,9 @@ class B: public A {
     A a;
     int _x;
     public:
-    B(int& x) : _x(x++), A(++x), a(--x) { cout << "B() " << _x << endl;  }
-    B(const A& a) : _x(a.getX()), A(a) { cout << "B() " << _x << endl;  }
-    B(const B& b) : _x(b._x) { cout << "B() " << _x << endl;  }
+        B(int& x) : _x(x++), a(--x), A(++x) { cout << "B() " << _x << endl;  }
+        B(const A& a) : _x(a.getX()), A(a) { cout << "B() " << _x << endl;  }
+        B(const B& b) : _x(b._x) { cout << "B() " << _x << endl;  }
 
 };
 
