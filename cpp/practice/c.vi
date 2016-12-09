@@ -1,0 +1,49 @@
+
+
+int find_max(Node A*, Node* B) {
+    int max = 0;
+    vector<Node*> Alist,Blist;
+    flatten(A,Alist);
+    flatten(B,Blist);
+    for(int i = 0; i < Alist.size()) {
+        for(int j = 0; j < Blist.size(); j++) {
+            if(rec_largest_common(Alist[i], Blist[j])) {
+                int local_max = find_size(Alist[i]);
+                if(local_max > max)
+                    max = local_max;
+            }
+        }
+    }
+    return max;
+}
+
+// some function that inserts all the nodes of the trees into a vector
+void flatten(Node* A, vector<Node*>& list) {
+    list.push_back(A);
+    for(int = 0; i < A->child.size(); i++) {
+        flatten(A->child[i], list);
+    }
+}
+
+int find_size(Node* A) {
+    int size = 1;
+    for(int = 0; i < A->child.size(); i++) {
+        size += find_size(A->child[i]);
+    }
+    return size;
+}
+
+bool rec_largest_common_subTree(Node* A, Node* B) {
+    if(A->child.size() != B->child.size()) {
+        return false;
+    }
+    else {
+        bool common = true;
+        for(int = 0; i < A->child.size(); i++) {
+            common = common && rec_largest_common_sub(A->child[i], B->child[i]);
+        }
+        return common;
+    }
+}
+
+
