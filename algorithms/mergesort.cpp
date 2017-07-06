@@ -1,5 +1,4 @@
 // Used to sort a vector or array
-//
 #include <vector>
 #include <iostream>
 
