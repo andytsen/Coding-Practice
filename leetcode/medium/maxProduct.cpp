@@ -37,15 +37,13 @@ int maxProductDP(vector<int>& A) {
     int* maxlist = new int[n];
     minlist[0] = A[0];
     maxlist[0] = A[0];
-    int global = A[0];
+    int res = A[0];
     for(int i = 1; i < n; i++) {
-        if(A[i] != 0) {
-            minlist[i] = min(global, min(minlist[i-1] * A[i], maxlist[i - 1] * A[i]));
-            maxlist[i] = max(global, max(minlist[i-1] * A[i], maxlist[i - 1] * A[i]));
-            global = global == 0 ? 1 : max(maxlist[i], global);
-        }
+        minlist[i] = min(A[i], min(minlist[i-1] * A[i], maxlist[i - 1] * A[i]));
+        maxlist[i] = max(A[i], max(minlist[i-1] * A[i], maxlist[i - 1] * A[i]));
+        res = max(res, maxlist[i]);
     }
-    return global;
+    return res;
 }
 
 
