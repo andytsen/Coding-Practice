@@ -16,10 +16,10 @@ void merge_sort(vector<int>& a, int low, int high) {
             a[low] = temp;
         }
     }
-    else {
+    else if(high != low) {
         int mid = (low + high) >> 1;
-        merge_sort(a, low, mid);
-        merge_sort(a, mid+1, high);
+        merge_sort(a, low, mid - 1);
+        merge_sort(a, mid, high);
         merge(a, low, mid, high);
     }
 }
@@ -32,21 +32,27 @@ void swap(int& a, int& b) {
 
 void merge(vector<int>& a, int low, int mid, int high) {
     int i = low;
-    int j = mid + 1;
-    int n = (mid - low + 1) + (high - mid + 2);
-    for(int i = 0; i < n; i++) {
-        if(a[i] > a[j]) {
-            swap(a[i], a[j]);
-            i++;
+    int j = mid;
+    vector<int> ss = vector<int>(high - low);
+    while(i < mid - 1 || j < high) {
+        if(a[i] < a[j]) {
+            ss.push_back(a[i]);
+            ++i;
+        } else {
+            ss.push_back(a[j]);
+            ++j;
         }
-        else { j++; }
+    }
+    for(int i = low; i < high; ++i) {
+        a[i] = ss[i - low];
     }
 }
 
 int main() {
-    int a = 5;
-    int b = 10;
-    swap(a,b);
-    cout << a << " " << b << endl;
+    vector<int> t1 = {1, 5, 3, 9, 2, -1};
+    merge(t1, 0, 3, t1.size());
+
+    for(int c : t1) { cout << c << " "; }
+    cout << endl;
     return 0;
 }
