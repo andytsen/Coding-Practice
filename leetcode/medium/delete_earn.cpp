@@ -11,9 +11,11 @@ int delete_earn(vector<int>& vals) {
     for(int i = 0; i < vals.size(); ++i) {
         int score = 0;
         for(int j = i; j < vals.size(); ++j) {
-            if(dp[j] == 0) { 
-                score += vals[j]; 
-            } 
+            if(dp[j] == 0 && vals[j] != delete_val - 1 && vals[j] != delete_val + 1) {
+                score += vals[j];
+                delete_val = vals[j]; 
+                dp[j] = 1;
+            }
         } 
         ans = max(score, ans);
     }
