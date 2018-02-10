@@ -1,0 +1,3 @@
+class magic_dict {
+
+};
