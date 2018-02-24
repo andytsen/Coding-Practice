@@ -7,6 +7,7 @@ using namespace std;
 
 int check_bounds(int,int,int);
 
+/*
 int recurs(vector<vector<char> >& board, int steps, int x, int y, int N) {
     if(check_bounds(x,y,N)) {
         if(board[x][y] == 'T') {
@@ -23,8 +24,8 @@ int recurs(vector<vector<char> >& board, int steps, int x, int y, int N) {
     } else {
         return INT_MAX;
     }
-
 }
+*/
 
 int check_bounds(int k, int l, int N) {
     return (k >= 0 && k < N && l >= 0 && l < N);
@@ -64,7 +65,13 @@ int main() {
         }
     }
 
-    cout << Mx << " " << My << endl;
-    int res = recurs(board, 0, Mx, My, N);
-    cout << res << endl;    
+    for(int i = 0; i < N; ++i) {
+        for(int j = 0; j < N; ++j) {
+            cout << board[i][j];
+        }
+        cout << endl;
+    }
+
+    //int res = recurs(board, 0, Mx, My, N);
+    //cout << res << endl;    
 }
