@@ -8,13 +8,13 @@ int maxProductDP(vector<int>&);
 // maximum product array
 int main() {
     vector<int> t1 = {3,-1,4,2};
-    vector<int> t2 = {0,2};
-    cout << maxProduct(t1) << " " << endl;
-    cout << maxProductDP(t2) << " " << endl;
+    vector<int> t2 = {0,2,0,2,7,1,-1,-9,1};
+    cout << maxProduct(t1) << " expected 8 " << endl;
+    cout << maxProductDP(t2) << " expected 126 " << endl;
     return 0;
 }
 
-// no DP starting from both sides
+// 2-ptr starting from front and back
 int maxProduct(vector<int>& A) {
     int n = A.size();
     int global = 1;
