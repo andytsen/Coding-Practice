@@ -1,22 +1,22 @@
+
+// Longest Increasing Subsequence
+// Andy Tseng
+
 #include <iostream>
 #include <vector>
 #include <cmath>
 
 using namespace std;
 
-int longest_recursive(vector<int>& a);
-int longest_dp(vector<int>& a);
+int main() {
+    vector<int> v1 = {10, 9, 2, 5, 3, 7, 101, 18};
+    return 0;
+}
 
-int helper(vector<int>& a, int index, int res) {
-    int local = 1;
-    for(int i = index; i < a.size(); i++) {
-        if(a[index] < a[i])
-            local = max(helper(a, i, res + 1), local);
+int get_longest(vector<int>& nums) {
+    for(int i = 1; i < nums.size(); ++i) {
+        for(int j = 0; j < i; ++j) {
+        }
     }
-    return res;
 }
 
-int longest_recursive(vector<int>& a) {
-   if(a.size() == 0) return 0;
-   helper(a, 0, 1);
-}
