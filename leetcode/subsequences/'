@@ -1,0 +1,31 @@
+// toycode that gets all subsequence of strings that are palindromes of at least
+// size n
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+bool palindrome(string s) {
+    for(int i = 0; i < s.size(); ++i) {
+        if(s[i] != s[s.size() - i - 1]) return false;
+    }
+    return true;
+}
+
+void dfs(vector<string>& res, string cur, string s, int index, int n) {
+    if(cur.size() >= n && palindrome(cur)) {
+    }
+}
+
+vector<string> get_palindromes(string s, int n) {
+
+}
+
+
+
+int main() {
+
+}

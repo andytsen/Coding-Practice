@@ -15,6 +15,8 @@ int get_longest(vector<int>& nums) {
         for(int j = i - 1; j >= 0; --j) {
             if(nums[i] > nums[j]) {
                 dp[i] = max(dp[j] + 1, dp[i]);
+            } else {
+                dp[i] = max(dp[j], dp[i]);
             }
         }
     }
@@ -27,7 +29,7 @@ int get_longest(vector<int>& nums) {
 }
 
 int main() {
-    vector<int> v1 = {1, 3, 5, 4, 7};
+    vector<int> v1 = {1, 3, 5, 4, 0, 7};
     get_longest(v1);
     vector<int> v2 = {3,3,3,3,3};
     get_longest(v2);
