@@ -5,7 +5,7 @@ def seive(n):
     # n : int
     res = []
     marks = [0] * (n + 1)
-    for i in range(2, int(math.sqrt(n))+1 ):
+    for i in range(2, int(math.sqrt(n)) + 1 ):
         if marks[i] == 0:
             j = i * i
             while j <= n:
@@ -16,6 +16,7 @@ def seive(n):
             res.append(i)
     return res
 
+# testing
 print(seive(30))
 print(seive(120))
 
