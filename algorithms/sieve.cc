@@ -26,7 +26,5 @@ vector<int> seive(int n) {
 }
 
 int main() {
-    vector<int> res = seive(100);
-    for(int i : res) { cout << i << " "; }
-    cout << endl;
+    for(int i : seive(100)) { cout << i << " "; }
 }

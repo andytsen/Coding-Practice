@@ -9,26 +9,6 @@
 using namespace std;
 
 int dial(int n) {
-    /*
-    vector<vector<bool>> mem = vector<vector<bool>>(10, vector<bool>(10, false));
-    if(n == 1) return 10;
-
-    mem[0][4] = true;
-    mem[0][6] = true;
-    mem[1][6] = true;
-    mem[1][8] = true;
-    mem[2][7] = true;
-    mem[2][9] = true;
-    mem[3][4] = true;
-    mem[3][8] = true;
-    mem[4][3] = true;
-    mem[4][9] = true;
-    mem[4][0] = true;
-    mem[6][0] = true;
-    mem[6][1] = true;
-    mem[6][7] = true;
-    */
-
     vector<vector<int>> dp = vector<vector<int>>(n, vector<int>(10, 0));
 
     // you can start on any number on the dialpad
@@ -60,6 +40,7 @@ int main() {
     cout << dial(1) <<  " = 10" << endl;
     cout << dial(2) <<  " = 20" << endl;
     cout << dial(3) <<  " = 46" << endl;
+    cout << dial(10) <<  " = 14912" << endl;
 }
 
 

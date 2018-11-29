@@ -1,12 +1,14 @@
 #include <iostream>
 using namespace std;
 
-typedef struct node 
+struct node 
 {
     int data;
     node* left;
     node* right;
-} node;
+
+    node(int v) : data(v), left(nullptr), right(nullptr) {}
+} ;
 
 void insert(node* root, int value)
 {
