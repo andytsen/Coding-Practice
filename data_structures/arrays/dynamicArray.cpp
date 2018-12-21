@@ -1,31 +1,37 @@
 #include <iostream>
-#include <vector>
+
 using namespace std;
 
-int main() 
-{
-    int n,q;
-    cin >> n >> q;
-    int lastAns = 0;
-    vector <vector<int> > seqList(n);
-    
-    for(int i = 0; i < q; i++)
-    {
-        int type, x, y;
-        cin >> type >> x >> y;
-        if(type == 1)
-        {
-            int seq = (x^lastAns) % n;
-            seqList[seq].push_back(y);
-        }
-        else if(type == 2)
-        {
-            int seq = (x^lastAns) % n;
-            int index = y % seqList[seq].size();
-            lastAns = seqList[seq][index];
-            cout << lastAns << endl;
-        }
+
+class dynArray {
+    int* data;
+    unsigned int current_size; // current size where the largest element
+    unsigned int actual_size = 1000; // actual size of the internal array
+
+    void resize(unsigned int new_size) {
+        
     }
 
-    return 0;
-}
+public:
+    
+    dynArray() : current_size(0) {
+        data = new int[actual_size];
+    }
+      
+    ~dynArray() {
+        delete data;
+    }
+
+    int& operator[] (int index) {
+        if(index > current_size) current_size = index;
+        if(index > actual_size) {
+            int new_size = actual_size + index;
+            resize(new_size);
+        }
+        return data[index];
+    }
+
+
+
+
+};
