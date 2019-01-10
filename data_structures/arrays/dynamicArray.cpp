@@ -30,8 +30,9 @@ public:
         }
         return data[index];
     }
-
-
-
-
 };
+
+int main() 
+{
+
+}
