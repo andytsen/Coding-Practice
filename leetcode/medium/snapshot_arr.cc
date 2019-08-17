@@ -26,6 +26,7 @@ public:
     }
 
     int snap() {
+        std::cout << "snapshot called\n";
         return cur_snap_id++;
     }
 
@@ -35,6 +36,8 @@ public:
             std::cout << "get failed\n";
             return -1;
         }
+
+        std::cout << "get(%d, %d) \n";
 
         // do binary search here
         int h = 0;
@@ -68,14 +71,15 @@ public:
         return 0;
     }  
 
-    void print()
+    std::vector<int> getWhole(int snap_id)
     {
-        for(int i = 0; i < cur_snap_id; ++i) 
+        std::vector<int> res;
+        for(int index = 0; index < this->size; ++index)
         {
-            
+            res.push_back(get(index, snap_id));
         }
+        return res;
     }
-
 };
 
 
@@ -93,18 +97,21 @@ public:
 int main() 
 {
     {
+        std::cout << "Test 1 ~~~~ \n";
         SnapshotArray* arr = new SnapshotArray(3);
-        std::cout << "setting 0 to 5\n";
         arr->set(0,5);
-        std::cout << "snapshotting\n";
         int snap_now = arr->snap();
-        std::cout << "at snap id: " << snap_now << " \\ arr[" << 0 << "] = " << arr->get(0, snap_now) << "\n";
         arr->set(1,5);
         std::cout << std::endl;
     }
 
     {
+        std::cout << "Test 2 ~~~~ \n";
         SnapshotArray* arr = new SnapshotArray(4);
+        arr->set(0,3);
+        arr->set(2,5);
+        int snap_now = arr->snap();
+        
     }
 
 
