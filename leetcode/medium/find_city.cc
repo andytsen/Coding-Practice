@@ -3,6 +3,7 @@
 #include <set>
 #include <limits.h>
 #include <unordered_map>
+#include <queue>
 
 using namespace std;
 
@@ -15,24 +16,25 @@ struct edge
 };
 
 
-int djikstra(int src, int dest, vector<int>& v, vector<vector<int>>& graph, int threshold)
+void djikstra(int src, vector<int>& v, vector<vector<int>>& graph, int threshold)
 {
     vector<int> d(graph.size(), INT_MAX); 
     priority_queue<std::pair<int,int>> pq; 
-    pq.push(0,src);
+    pq.push(std::pair<int,int>(0,src));
 
     while(!pq.empty())
     {
         std::pair<int,int> top = pq.top();
         int n_cur = top.second;
         int w_cur = top.first;
+        pq.pop();
         for(int i = 0; i < graph[n_cur].size(); ++i)
         {
             if (graph[n_cur][i] > 0)
             {
                 if (w_cur + graph[n_cur][i] < d[i])
                 {
-                    pq.push(w_cur + graph[n_cur][i], i);
+                    pq.push(std::pair<int,int>(w_cur + graph[n_cur][i], i));
                     d[i] = w_cur + graph[n_cur][i];
                 }
             }
@@ -40,7 +42,8 @@ int djikstra(int src, int dest, vector<int>& v, vector<vector<int>>& graph, int 
     }
     for (int di = 0; di < d.size(); ++di)
     {
-        d[di]++
+        if(d[di] <= threshold && di != src)
+            v[di]++;
     }
 
 }
@@ -55,8 +58,22 @@ int find_city(int num_verts, vector<edge>& edges, int distance_threshold)
     }
 
     vector<int> neighbors(num_verts,0);
-
-
+    for(int i = 0; i < num_verts; ++i)
+    {
+        djikstra(i, neighbors, graph, distance_threshold);
+    }
+    
+    int min_val = INT_MAX;
+    int city_num;
+    for (int ni = 0; ni < neighbors.size(); ++ni)
+    {
+        if (neighbors[ni] <= min_val)
+        {
+            min_val = neighbors[ni];
+            city_num = ni;
+        }
+    }
+    return city_num;
 }
 
 int main()
