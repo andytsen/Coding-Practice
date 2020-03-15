@@ -5,93 +5,69 @@
 // put - remove pointer from Linked List - add new value at the end, evicting form map is O(1)
 // get - O(1) Unordered_map
 
-// 3 -> 3
-// 4 -> 4
 
-#include <unordered_map>
 #include <list>
-#include <memory>
+#include <unordered_map>
 #include <iostream>
 
-class lru_cache
+using namespace std;
+
+// redo
+class LRUCache 
 {
-    typedef std::list<std::pair<int,int>> node_list;
-    
-    int max_capacity = 0;
-    int cur_capacity = 0;
-    std::list<std::pair<int,int>> values;
-    std::unordered_map<int, std::list<std::pair<int,int>>::iterator> iter_map;
+private:
+    int cap;
+    int cur;
+    list<int> eviction_queue;
+    unordered_map<int, std::pair<int, list<int>::iterator>> data;
 
 public:
-    lru_cache(int capacity) : max_capacity(capacity) 
-    {
-
-    }
-
-    ~lru_cache()
-    {
-        
-    }
-
-    void put(int key, int val)
-    {
-        if (cur_capacity == max_capacity)
-        {
-            iter_map[values.front().first] = values.end();
-            values.erase(values.begin()); 
-        }
-        else 
-        {
-            cur_capacity++;
-        }
-        iter_map[key] = values.insert(values.end(), std::pair<int,int>(key,val));
-    }
+    LRUCache(int capacity) : cap(capacity), cur(0) {}
 
     int get(int key)
     {
-        // get value from values list 
-        // remove it from the list and put it in the front
-        if(iter_map[key] == values.end())
+        if (data.find(key) != data.end())
         {
-            return -1;
-        }
-        else 
-        {
-            values.erase(iter_map[key]);
-            values.insert(values.end(), *iter_map[key]);
-            return (*(iter_map[key])).second;
-        }
+            eviction_queue.erase(eviction_queue.begin());
+            auto it = eviction_queue.insert(eviction_queue.end(), data[key].first);
+            data[key].second = it;
+            return data[key].first;
+        } 
+        return -1;
     }
 
-    void put_test_func(int key, int val)
+    void put(int key, int value)
     {
-        std::cout << "put (" << key << "," << val << ")" << std::endl;
-        put(key,val);
+        if (cur == cap)
+        {
+            // evict someone
+            auto it = eviction_queue.begin();
+            data.erase(*it);
+            eviction_queue.erase(eviction_queue.begin());
+            cur--;
+        }
+        // do the adding/setup
+        auto it = eviction_queue.insert(eviction_queue.end(), value);
+        data[key] = std::pair<int, list<int>::iterator>(value, it);
+        cur++;
     }
 
-    int get_test_func(int key)
-    {
-        int results =  get(key);
-        std::cout << "get (" << key << ") >> "  << results << std::endl;
-        return results;
-    }
 };
 
 int main()
 {
-    lru_cache* inst = new lru_cache(3);
-
-    inst->put_test_func(1,1);
-    inst->put_test_func(2,2);
-    inst->put_test_func(3,3);
-    inst->get_test_func(2);
-    inst->put_test_func(4,4);
-    inst->get_test_func(1);
-    inst->put_test_func(5,5);
-    inst->get_test_func(3);
-    inst->get_test_func(2);
-    inst->get_test_func(4);
-    inst->get_test_func(5);
-
-    delete inst;
+    LRUCache _cache(2);
+    _cache.put(1,1);
+    _cache.put(2,2);
+    std::cout << "get(1) = " << _cache.get(1) << std::endl;
+    _cache.put(3,3);
+    std::cout << "get(2) = " << _cache.get(2) << std::endl;
+    _cache.put(4,4);
+    std::cout << "get(1) = " << _cache.get(1) << std::endl;
+    std::cout << "get(3) = " << _cache.get(3) << std::endl;
+    std::cout << "get(4) = " << _cache.get(4) << std::endl;
 }
+
+
+
+

@@ -9,17 +9,26 @@ struct Interval {
     Interval(int s, int e) : start(s), end(e) {}
 };
 
-vector<Interval> merge(vector<Interval>& interval_list) {
-    vector<Interval> merged;
-    sort(interval_list.begin(), interval_list.end(), [] (Interval a, Interval b) { return a.start > b.start; });
-    merged.push_back(interval_list[0]);
-    Interval cur = merged.back();
-    for(Interval i : interval_list) {
-        if(i.end < cur.end) {
-            merged.push_back(i); 
-        } else {
-            cur.end = max(cur.end, i.end);
-        }
+vector<vector<int>> intervalIntersection(vector<vector<int>>& a, vector<vector<int>>& b)
+{
+    
+    sort(a.begin(), 
+         a.end(), 
+        [](vector<int>& v1, vector<int>& v2) {
+            return v1[0] > v2[0] || v1[1] > v1[2];
+        });
+
+    sort(b.begin(), 
+         b.end(), 
+        [](vector<int>& v1, vector<int>& v2) {
+            return v1[0] > v2[0] || v1[1] > v1[2];
+        });
+
+    int a_ptr = 0;
+    int b_ptr = 0;
+
+    while (a_ptr < a.size() || b_ptr < b.size())
+    {
+
     }
-    return merged;
 }
